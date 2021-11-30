@@ -17,4 +17,9 @@ class Agama extends Model
     protected $keyType = 'string';
 
     protected $fillable = ['kode', 'nama'];
+
+    function mahasiswas()
+    {
+        return $this->hasMany(Mahasiswa::class, 'kode_agama');
+    }
 }

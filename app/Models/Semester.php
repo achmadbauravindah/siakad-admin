@@ -17,4 +17,14 @@ class Semester extends Model
     protected $keyType = 'string';
 
     protected $fillable = ['kode', 'nama'];
+
+    function krses()
+    {
+        return $this->hasMany(Krs::class, 'kode_semester');
+    }
+
+    function khses()
+    {
+        return $this->hasMany(Khs::class, 'kode_semester');
+    }
 }

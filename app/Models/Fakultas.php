@@ -16,4 +16,9 @@ class Fakultas extends Model
     protected $keyType = 'string';
 
     protected $fillable = ['kode', 'nama_fak'];
+
+    function jurusans()
+    {
+        return $this->hasMany(Jurusan::class, 'kode_fak');
+    }
 }

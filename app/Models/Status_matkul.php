@@ -17,4 +17,9 @@ class Status_matkul extends Model
     protected $keyType = 'string';
 
     protected $fillable = ['kode', 'nama'];
+
+    function matakuliahs()
+    {
+        return $this->hasMany(Matakuliah::class, 'kode_status_matkul');
+    }
 }

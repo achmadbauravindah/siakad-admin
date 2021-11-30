@@ -17,4 +17,19 @@ class Program_studi extends Model
     protected $keyType = 'string';
 
     protected $fillable = ['kode', 'nama_prod', 'kode_jur'];
+
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class, 'kode_jur');
+    }
+
+    function mahasiswas()
+    {
+        return $this->hasMany(Mahasiswa::class, 'kode_prodi');
+    }
+
+    function dosens()
+    {
+        return $this->hasMany(Dosen::class, 'kode_prodi');
+    }
 }
