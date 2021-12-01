@@ -17,14 +17,19 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, ...$guards)
+    public function handle(Request $request, Closure $next, $guard = null)
     {
-        $guards = empty($guards) ? [null] : $guards;
-
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
-            }
+        if ($guard == "admin" && Auth::guard($guard)->check()) {
+            return redirect('/admin');
+        }
+        if ($guard == "mahasiswa" && Auth::guard($guard)->check()) {
+            return redirect('/mahasiswa');
+        }
+        if ($guard == "dosen" && Auth::guard($guard)->check()) {
+            return redirect('/dosen');
+        }
+        if (Auth::guard($guard)->check()) {
+            return abort(403, "Not Authenticated");
         }
 
         return $next($request);

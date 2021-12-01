@@ -14,7 +14,11 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        return view('mahasiswa.index');
+    }
+    public function indexAdmin()
+    {
+        return view('auth.admin.mahasiswa.index');
     }
 
     /**
@@ -24,7 +28,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth.admin.mahasiswa.create');
     }
 
     /**
