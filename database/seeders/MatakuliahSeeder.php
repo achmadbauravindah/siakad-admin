@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Matakuliah;
 use Illuminate\Database\Seeder;
 
 class MatakuliahSeeder extends Seeder
@@ -13,6 +14,8 @@ class MatakuliahSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Matakuliah::factory()
+            ->count(15)
+            ->create();
     }
 }

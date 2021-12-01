@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Semester;
 use Illuminate\Database\Seeder;
 
 class SemesterSeeder extends Seeder
@@ -13,6 +14,8 @@ class SemesterSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Semester::factory()
+            ->count(8)
+            ->create();
     }
 }

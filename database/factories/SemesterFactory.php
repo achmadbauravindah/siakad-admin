@@ -13,8 +13,10 @@ class SemesterFactory extends Factory
      */
     public function definition()
     {
+        static $count = 0;
         return [
-            //
+            'kode' => $count + 1,
+            'nama' => ($count++) % 2 == 1 ? 'Genap' : 'Ganjil',
         ];
     }
 }

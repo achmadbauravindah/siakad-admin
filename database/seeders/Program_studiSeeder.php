@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Program_studi;
 use Illuminate\Database\Seeder;
 
-class ProgramStudiSeeder extends Seeder
+class Program_studiSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +14,8 @@ class ProgramStudiSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Program_studi::factory()
+            ->count(12)
+            ->create();
     }
 }

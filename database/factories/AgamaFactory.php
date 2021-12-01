@@ -13,8 +13,11 @@ class AgamaFactory extends Factory
      */
     public function definition()
     {
+        $agamas = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Kongfutsu'];
+        static $count = 0;
         return [
-            //
+            'kode' => $count + 1,
+            'nama' => $agamas[$count++],
         ];
     }
 }

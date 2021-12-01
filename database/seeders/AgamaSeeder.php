@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Agama;
 use Illuminate\Database\Seeder;
 
 class AgamaSeeder extends Seeder
@@ -13,6 +14,8 @@ class AgamaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Agama::factory()
+            ->count(6)
+            ->create();
     }
 }
