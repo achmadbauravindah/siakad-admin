@@ -14,7 +14,14 @@ class MatakuliahController extends Controller
      */
     public function index()
     {
-        //
+        $matakuliahs =  Matakuliah::all();
+        return view('auth.admin.matakuliah.index', compact('matakuliahs'));
+    }
+
+    public function indexAdmin()
+    {
+        $matakuliahs =  Matakuliah::all();
+        return view('auth.admin.matakuliah.index', compact('matakuliahs'));
     }
 
     /**

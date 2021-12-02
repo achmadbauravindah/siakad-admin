@@ -15,15 +15,15 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="/tugas6-paw/index.php">
+    <li class="nav-item {{ request()->is('admin') ? ' active':''}}">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
 
     <!-- Nav Item - Mahasiswa -->
-    <li class="nav-item active">
-        <a class="nav-link" href="/tugas6-paw/Views/mahasiswa/index.php">
+    <li class="nav-item {{ request()->is('admin/mahasiswas','admin/mahasiswas/*') ? ' active':''}}">
+        <a class="nav-link" href="{{ route('admin.mahasiswas.index') }}">
             <span class="material-icons">
                 people
             </span>
@@ -31,8 +31,8 @@
     </li>
 
     <!-- Nav Item - Dosen -->
-    <li class="nav-item active">
-        <a class="nav-link" href="/tugas6-paw/index.php">
+    <li class="nav-item {{ request()->is('admin/dosens','admin/dosens/*') ? ' active':''}}">
+        <a class="nav-link" href="{{ route('admin.dosens.index') }}">
             <span class="material-icons">
                 people
             </span>
@@ -40,8 +40,8 @@
     </li>
 
     <!-- Nav Item - Mata Kuliah -->
-    <li class="nav-item active">
-        <a class="nav-link" href="/index.php">
+    <li class="nav-item {{ request()->is('admin/matakuliahs','admin/matakuliahs/*') ? ' active':''}}">
+        <a class="nav-link" href="{{ route('admin.matakuliahs.index') }}">
             <span class="material-icons">
                 menu_book
             </span>

@@ -51,7 +51,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                    Genakno
+                    {{ auth()->guard('admin')->user()->name }}
                 </span>
                 <span class="material-icons" style="color: black;">
                     admin_panel_settings
@@ -85,7 +85,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="/tugas6-paw/Views/auth/logout.php">Logout</a>
+                <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
             </div>
         </div>
     </div>

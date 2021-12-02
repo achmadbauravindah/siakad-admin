@@ -33,7 +33,7 @@
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Mahasiswa
                                     </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        999 {{ route('admin.dashboard') }}
+                                        {{ count($mahasiswas) }}
                                     </div>
                                 </div>
                                 <div class="col-auto">
@@ -48,13 +48,13 @@
 
                 <!-- Dosen Card -->
                 <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Dosen</div>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Dosen</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        999
+                                        {{ count($dosens) }}
                                     </div>
                                 </div>
                                 <div class="col-auto">
@@ -76,7 +76,7 @@
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Mata Kuliah
                                     </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        999
+                                        {{ count($matakuliahs) }}
                                     </div>
                                 </div>
                                 <div class="col-auto">
@@ -106,7 +106,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>NIM</th>
-                                    <th>Alamat</th>
+                                    <th>Prodi</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Agama</th>
                                 </tr>
@@ -116,13 +116,22 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>NIM</th>
-                                    <th>Alamat</th>
+                                    <th>Prodi</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Agama</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <tr></tr>
+                                @foreach ($mahasiswas as $mahasiswa)
+                                <tr>
+                                    <th scope="row">{{ $loop->index+1 }}</th>
+                                    <td>{{ $mahasiswa->nama }}</td>
+                                    <td>{{ $mahasiswa->nim }}</td>
+                                    <td>{{ $mahasiswa->program_studi->nama_prod }}</td>
+                                    <td>{{ ($mahasiswa->jenis_kelamin == 1 ? 'Laki-laki':'Perempuan') }}</td>
+                                    <td>{{ $mahasiswa->agama->nama }}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

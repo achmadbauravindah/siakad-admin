@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MatakuliahController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,8 +43,14 @@ Route::group(
         Route::group(
             ['prefix' => 'mahasiswas', 'as' => 'mahasiswas.'],
             function () {
-                Route::get('/', [MahasiswaController::class, 'indexAdmin'])->name('indexAdmin');
+                Route::get('/', [MahasiswaController::class, 'indexAdmin'])->name('index');
                 Route::get('/create', [MahasiswaController::class, 'create'])->name('create');
+                Route::post('/store', [MahasiswaController::class, 'store'])->name('store');
+                Route::get('/edit/{mahasiswa:nim}', [MahasiswaController::class, 'edit'])->name('edit');
+                Route::patch('/update/{mahasiswa:nim}', [MahasiswaController::class, 'update'])->name('update');
+                // Destroy ubah ke delete di formnya juga
+                Route::get('/destroy/{mahasiswa:nim}', [MahasiswaController::class, 'destroy'])->name('destroy');
+                Route::get('/{mahasiswa:nim}', [MahasiswaController::class, 'show'])->name('show');
             }
         );
         // Admin - Dosen
@@ -52,6 +59,19 @@ Route::group(
             function () {
                 Route::get('/', [DosenController::class, 'indexAdmin'])->name('index');
                 Route::get('/create', [DosenController::class, 'create'])->name('create');
+                Route::post('/store', [DosenController::class, 'store'])->name('store');
+                Route::get('/edit/{dosen:nip}', [DosenController::class, 'edit'])->name('edit');
+                Route::patch('/update/{dosen:nip}', [DosenController::class, 'update'])->name('update');
+                Route::get('/destroy/{dosen:nip}', [DosenController::class, 'destroy'])->name('destroy');
+                Route::get('/{dosen:nip}', [DosenController::class, 'show'])->name('show');
+            }
+        );
+        // Admin - Matakuliah
+        Route::group(
+            ['prefix' => 'matakuliahs', 'as' => 'matakuliahs.'],
+            function () {
+                Route::get('/', [MatakuliahController::class, 'indexAdmin'])->name('index');
+                Route::get('/create', [MatakuliahController::class, 'create'])->name('create');
             }
         );
     }

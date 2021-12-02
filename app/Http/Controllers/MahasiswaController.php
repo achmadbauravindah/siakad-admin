@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMahasiswaRequest;
+use App\Http\Requests\UpdateMahasiswaRequest;
+use App\Models\Agama;
 use App\Models\Mahasiswa;
+use App\Models\Program_studi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class MahasiswaController extends Controller
 {
@@ -18,7 +23,8 @@ class MahasiswaController extends Controller
     }
     public function indexAdmin()
     {
-        return view('auth.admin.mahasiswa.index');
+        $mahasiswas = Mahasiswa::all();
+        return view('auth.admin.mahasiswa.index', compact('mahasiswas'));
     }
 
     /**
@@ -28,18 +34,26 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('auth.admin.mahasiswa.create');
+        $program_studis = Program_studi::all();
+        $agamas = Agama::all();
+        return view('auth.admin.mahasiswa.create', compact('program_studis', 'agamas'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in <storage class=""></storage>
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMahasiswaRequest $request)
     {
-        //
+        $attr = $request->all();
+        $attr['password'] = Hash::make($request->nim);
+
+        Mahasiswa::create($attr);
+
+        session()->flash('success', 'Mahasiswa telah ditambahkan');
+        return redirect(route('admin.mahasiswas.index'));
     }
 
     /**
@@ -50,7 +64,7 @@ class MahasiswaController extends Controller
      */
     public function show(Mahasiswa $mahasiswa)
     {
-        //
+        return view('auth.admin.mahasiswa.show', compact('mahasiswa'));
     }
 
     /**
@@ -61,7 +75,9 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        //
+        $program_studis = Program_studi::all();
+        $agamas = Agama::all();
+        return view('auth.admin.mahasiswa.edit', compact('mahasiswa', 'program_studis', 'agamas'));
     }
 
     /**
@@ -71,9 +87,16 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mahasiswa $mahasiswa)
+    public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
     {
-        //
+        $attr = $request->all();
+        $attr['nim'] = $mahasiswa->nim;
+        $attr['password'] = $mahasiswa->password;
+
+        $mahasiswa->update($attr);
+
+        session()->flash('success', 'Mahasiswa telah diedit');
+        return redirect(route('admin.mahasiswas.index'));
     }
 
     /**
@@ -84,6 +107,9 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->delete();
+
+        session()->flash('success', 'Mahasiswa berhasil dihapus');
+        return redirect(route('admin.dosens.index'));
     }
 }

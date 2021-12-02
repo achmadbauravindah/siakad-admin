@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dashboard;
+use App\Models\Dosen;
+use App\Models\Mahasiswa;
+use App\Models\Matakuliah;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,7 +17,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('auth.admin.dashboard.index');
+        $mahasiswas =  Mahasiswa::all();
+        $dosens =  Dosen::all();
+        $matakuliahs =  Matakuliah::all();
+        return view('auth.admin.dashboard.index', compact('mahasiswas', 'dosens', 'matakuliahs'));
     }
 
     /**
