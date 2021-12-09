@@ -73,14 +73,16 @@
                                     <td>{{ $program_studi->nama_prod }}</td>
 
                                     <td>{{ $program_studi->kode }}</td>
-                                    <td>
-                                        <a
-                                            href="{{ route('admin.program_studis.edit', $program_studi->kode) }}">Edit</a>
+                                    <td class="text-center">
+                                        <a href="{{ route('admin.program_studis.edit', $program_studi->kode) }}">
+                                            <i class="fas fa-edit text-success"></i>
+                                        </a>
                                         @if (($program_studi->dosens)->isEmpty() &&
                                         ($program_studi->mahasiswas)->isEmpty())
-                                        |
-                                        <a
-                                            href="{{ route('admin.program_studis.destroy', $program_studi->kode) }}">Delete</a>
+                                        <a href="{{ route('admin.program_studis.destroy', $program_studi->kode) }}"
+                                            class="ml-3">
+                                            <i class="fas fa-trash-alt text-danger"></i>
+                                        </a>
                                         @endif
                                     </td>
                                 </tr>

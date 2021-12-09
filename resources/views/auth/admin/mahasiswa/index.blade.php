@@ -75,10 +75,18 @@
                                     <td>{{ $mahasiswa->program_studi->nama_prod }}</td>
                                     <td>{{ ($mahasiswa->jenis_kelamin == 0 ? 'Laki-laki':'Perempuan') }}</td>
                                     <td>{{ $mahasiswa->agama->nama }}</td>
-                                    <td>
-                                        <a href="{{ route('admin.mahasiswas.show', $mahasiswa->nim) }}">Detail</a>
-                                        | <a href="{{ route('admin.mahasiswas.edit', $mahasiswa->nim) }}">Edit</a>
-                                        | <a href="{{ route('admin.mahasiswas.destroy', $mahasiswa->nim) }}">Delete</a>
+                                    <td class="text-center">
+                                        <a href="{{ route('admin.mahasiswas.show', $mahasiswa->nim) }}">
+                                            <i class="far fa-eye text-secondary"></i>
+                                        </a>
+                                        <a href="{{ route('admin.mahasiswas.edit', $mahasiswa->nim) }}" class="ml-3">
+                                            <i class="fas fa-edit text-success"></i>
+                                        </a>
+                                        @if ( (($mahasiswa->khses)->isEmpty()) && (($mahasiswa->krses)->isEmpty()))
+                                        <a href="{{ route('admin.mahasiswas.destroy', $mahasiswa->nim) }}" class="ml-3">
+                                            <i class="fas fa-trash-alt text-danger"></i>
+                                        </a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

@@ -75,10 +75,17 @@
                                     <td>{{ $matakuliah->nama }}</td>
                                     <td>{{ $matakuliah->sks }}</td>
                                     <td>{{ $matakuliah->status_matkul->nama }}</td>
-                                    <td>
-                                        <a href="{{ route('admin.matakuliahs.edit', $matakuliah->kode) }}">Edit</a>
-                                        |
-                                        <a href="{{ route('admin.matakuliahs.destroy', $matakuliah->kode) }}">Delete</a>
+                                    <td class="text-center">
+                                        <a href="{{ route('admin.matakuliahs.edit', $matakuliah->kode) }}">
+                                            <i class="fas fa-edit text-success"></i>
+                                        </a>
+                                        @if ( (($matakuliah->krses)->isEmpty()) &&
+                                        (($matakuliah->khses)->isEmpty()) && (($matakuliah->dosens)->isEmpty()))
+                                        <a href="{{ route('admin.matakuliahs.destroy', $matakuliah->kode) }}"
+                                            class="ml-3">
+                                            <i class="fas fa-trash-alt text-danger"></i>
+                                        </a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

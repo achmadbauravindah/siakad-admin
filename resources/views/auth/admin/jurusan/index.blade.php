@@ -70,11 +70,14 @@
                                     <td>{{ $jurusan->nama_jur }}</td>
 
                                     <td>{{ $jurusan->kode }}</td>
-                                    <td>
-                                        <a href="{{ route('admin.jurusans.edit', $jurusan->kode) }}">Edit</a>
+                                    <td class="text-center">
+                                        <a href="{{ route('admin.jurusans.edit', $jurusan->kode) }}">
+                                            <i class="fas fa-edit text-success"></i>
+                                        </a>
                                         @if (($jurusan->program_studis)->isEmpty())
-                                        |
-                                        <a href="{{ route('admin.jurusans.destroy', $jurusan->kode) }}">Delete</a>
+                                        <a href="{{ route('admin.jurusans.destroy', $jurusan->kode) }}" class="ml-3">
+                                            <i class="fas fa-trash-alt text-danger"></i>
+                                        </a>
                                         @endif
                                     </td>
                                 </tr>

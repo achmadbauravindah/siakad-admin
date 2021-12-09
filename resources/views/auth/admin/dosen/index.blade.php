@@ -74,10 +74,19 @@
                                     <td>{{ $dosen->program_studi->nama_prod }}</td>
                                     <td>{{ ($dosen->jenis_kelamin == 0 ? 'Laki-laki':'Perempuan') }}</td>
                                     <td>{{ $dosen->agama->nama }}</td>
-                                    <td>
-                                        <a href="{{ route('admin.dosens.show', $dosen->nip) }}">Details</a>
-                                        | <a href="{{ route('admin.dosens.edit', $dosen->nip) }}">Edit</a>
-                                        | <a href="{{ route('admin.dosens.destroy', $dosen->nip) }}">Delete</a>
+                                    <td class="text-center">
+
+                                        <a href="{{ route('admin.dosens.show', $dosen->nip) }}">
+                                            <i class="far fa-eye text-secondary"></i>
+                                        </a>
+                                        <a href="{{ route('admin.dosens.edit', $dosen->nip) }}" class="ml-3">
+                                            <i class="fas fa-edit text-success"></i>
+                                        </a>
+                                        @if ( (($dosen->khses)->isEmpty()) && (($dosen->krses)->isEmpty()))
+                                        <a href="{{ route('admin.dosens.destroy', $dosen->nip) }}" class="ml-3">
+                                            <i class="fas fa-trash-alt text-danger"></i>
+                                        </a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
