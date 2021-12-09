@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMahasiswaRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
 use App\Models\Agama;
+use App\Models\Khs;
 use App\Models\Mahasiswa;
+use App\Models\Matakuliah;
 use App\Models\Program_studi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,8 +21,11 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        return view('mahasiswa.index');
+        $matakuliahs = Matakuliah::all();
+        $mahasiswa = auth()->user();
+        return view('mahasiswa.index', compact('mahasiswa', 'matakuliahs'));
     }
+
     public function indexAdmin()
     {
         $mahasiswas = Mahasiswa::all();
@@ -110,6 +115,29 @@ class MahasiswaController extends Controller
         $mahasiswa->delete();
 
         session()->flash('success', 'Mahasiswa berhasil dihapus');
-        return redirect(route('admin.dosens.index'));
+        return redirect(route('admin.mahasiswas.index'));
+    }
+
+    public function updatePassword()
+    {
+        request()->validate([
+            'oldPassword' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $attr = request()->all();
+
+        $mahasiswa_nim = auth()->user()->nim;
+        $mahasiswa = Mahasiswa::find($mahasiswa_nim);
+
+        if (Hash::check(request()->oldPassword, $mahasiswa->password)) {
+            $attr['password'] = Hash::make(request()->password);
+            $mahasiswa->update($attr);
+            return redirect()->route('mahasiswa.profile')->with('success', 'Password telah diubah');
+        } else {
+            return redirect()->route('mahasiswa.profile')->with('error', 'Password lama salah');
+        }
+
+        return redirect()->route('mahasiswa.profile')->with('success', 'Password telah diubah');
     }
 }

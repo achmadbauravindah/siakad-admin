@@ -3,8 +3,14 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\FakultasController;
+use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\KhsController;
+use App\Http\Controllers\KrsController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatakuliahController;
+use App\Http\Controllers\ProgramStudiController;
+use App\Http\Controllers\StatusMatkulController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -72,6 +78,77 @@ Route::group(
             function () {
                 Route::get('/', [MatakuliahController::class, 'indexAdmin'])->name('index');
                 Route::get('/create', [MatakuliahController::class, 'create'])->name('create');
+                Route::post('/store', [MatakuliahController::class, 'store'])->name('store');
+                Route::get('/edit/{matakuliah:kode}', [MatakuliahController::class, 'edit'])->name('edit');
+                Route::patch('/update/{matakuliah:kode}', [MatakuliahController::class, 'update'])->name('update');
+                Route::get('/destroy/{matakuliah:kode}', [MatakuliahController::class, 'destroy'])->name('destroy');
+                Route::get('/{matakuliah:kode}', [MatakuliahController::class, 'show'])->name('show');
+            }
+        );
+
+        // Admin - Status Matakuliah
+        Route::group(
+            ['prefix' => 'status-matkuls', 'as' => 'status_matkuls.'],
+            function () {
+                Route::get('/', [StatusMatkulController::class, 'indexAdmin'])->name('index');
+                Route::get('/create', [StatusMatkulController::class, 'create'])->name('create');
+                Route::post('/store', [StatusMatkulController::class, 'store'])->name('store');
+                Route::put('/update/{matakuliah:kode}', [StatusMatkulController::class, 'updateAndDelete'])->name('update_delete');
+            }
+        );
+
+        // Admin - Fakultas
+        Route::group(
+            ['prefix' => 'fakultases', 'as' => 'fakultases.'],
+            function () {
+                Route::get('/', [FakultasController::class, 'indexAdmin'])->name('index');
+                Route::get('/create', [FakultasController::class, 'create'])->name('create');
+                Route::post('/store', [FakultasController::class, 'store'])->name('store');
+                Route::get('/edit/{fakultas:kode}', [FakultasController::class, 'edit'])->name('edit');
+                Route::patch('/update/{fakultas:kode}', [FakultasController::class, 'update'])->name('update');
+                Route::get('/destroy/{fakultas:kode}', [FakultasController::class, 'destroy'])->name('destroy');
+            }
+        );
+
+        // Admin - Jurusan
+        Route::group(
+            ['prefix' => 'jurusans', 'as' => 'jurusans.'],
+            function () {
+                Route::get('/', [JurusanController::class, 'indexAdmin'])->name('index');
+                Route::get('/create', [JurusanController::class, 'create'])->name('create');
+                Route::post('/store', [JurusanController::class, 'store'])->name('store');
+                Route::get('/edit/{jurusan:kode}', [JurusanController::class, 'edit'])->name('edit');
+                Route::patch('/update/{jurusan:kode}', [JurusanController::class, 'update'])->name('update');
+                Route::get('/destroy/{jurusan:kode}', [JurusanController::class, 'destroy'])->name('destroy');
+            }
+        );
+
+        // Admin - Program Studi
+        Route::group(
+            ['prefix' => 'program-studis', 'as' => 'program_studis.'],
+            function () {
+                Route::get('/', [ProgramStudiController::class, 'indexAdmin'])->name('index');
+                Route::get('/create', [ProgramStudiController::class, 'create'])->name('create');
+                Route::post('/store', [ProgramStudiController::class, 'store'])->name('store');
+                Route::get('/edit/{program_studi:kode}', [ProgramStudiController::class, 'edit'])->name('edit');
+                Route::patch('/update/{program_studi:kode}', [ProgramStudiController::class, 'update'])->name('update');
+                Route::get('/destroy/{program_studi:kode}', [ProgramStudiController::class, 'destroy'])->name('destroy');
+            }
+        );
+
+        // Admin - KRS
+        Route::group(
+            ['prefix' => 'krses', 'as' => 'krses.'],
+            function () {
+                Route::get('/', [KrsController::class, 'indexAdmin'])->name('index');
+            }
+        );
+
+        // Admin - KHS
+        Route::group(
+            ['prefix' => 'khses', 'as' => 'khses.'],
+            function () {
+                Route::get('/', [KhsController::class, 'indexAdmin'])->name('index');
             }
         );
     }
@@ -82,6 +159,18 @@ Route::group(
     ['middleware' => 'auth:mahasiswa', 'prefix' => 'mahasiswa', 'as' => 'mahasiswa.'],
     function () {
         Route::get('/', [MahasiswaController::class, 'index'])->name('index');
+        Route::get('#profile', [MahasiswaController::class, 'index'])->name('profile');
+        Route::get('/', [MahasiswaController::class, 'index'])->name('index');
+        Route::patch('/updatePassword', [MahasiswaController::class, 'updatePassword'])->name('updatePassword');
+
+        // Mahasiswa - KRS
+        Route::group(
+            ['prefix' => 'krses', 'as' => 'krses.'],
+            function () {
+                Route::post('/store', [KrsController::class, 'store'])->name('store');
+                Route::get('/destroy/{krs:id}', [KrsController::class, 'destroy'])->name('destroy');
+            }
+        );
     }
 );
 
@@ -90,5 +179,8 @@ Route::group(
     ['middleware' => 'auth:dosen', 'prefix' => 'dosen', 'as' => 'dosen.'],
     function () {
         Route::get('/', [DosenController::class, 'index'])->name('index');
+        Route::get('#profile', [DosenController::class, 'index'])->name('profile');
+        Route::get('/', [DosenController::class, 'index'])->name('index');
+        Route::patch('/updatePassword', [DosenController::class, 'updatePassword'])->name('updatePassword');
     }
 );

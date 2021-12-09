@@ -32,6 +32,10 @@ class CreateDosensTable extends Migration
             // FK Prodi
             $table->char('kode_prodi', 2);
             $table->foreign('kode_prodi')->references('kode')->on('program_studis');
+
+            // FK Matkul
+            $table->char('kode_matkul', 6);
+            $table->foreign('kode_matkul')->references('kode')->on('matakuliahs');
         });
     }
 

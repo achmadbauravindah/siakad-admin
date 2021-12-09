@@ -18,17 +18,22 @@ class Matakuliah extends Model
 
     protected $fillable = ['kode', 'nama', 'sks', 'kode_status_matkul'];
 
-    function status_matkuls()
+    function status_matkul()
     {
         return $this->belongsTo(Status_matkul::class, 'kode_status_matkul');
     }
     function krses()
     {
-        return $this->hasMany(Krs::class, 'kode_semester');
+        return $this->hasMany(Krs::class, 'kode_matkul');
     }
 
     function khses()
     {
-        return $this->hasMany(Khs::class, 'kode_semester');
+        return $this->hasMany(Khs::class, 'kode_matkul');
+    }
+
+    function dosens()
+    {
+        return $this->hasMany(Dosen::class, 'kode_matkul');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Khs;
 use Illuminate\Database\Seeder;
 
 class KhsSeeder extends Seeder
@@ -13,6 +14,8 @@ class KhsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Khs::factory()
+            ->count(10)
+            ->create();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Krs;
 use Illuminate\Database\Seeder;
 
 class KrsSeeder extends Seeder
@@ -13,6 +14,8 @@ class KrsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Krs::factory()
+            ->count(10)
+            ->create();
     }
 }

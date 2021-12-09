@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
+use App\Models\Khs;
 use App\Models\Krs;
+use App\Models\Matakuliah;
 use Illuminate\Http\Request;
 
 class KrsController extends Controller
@@ -14,7 +17,13 @@ class KrsController extends Controller
      */
     public function index()
     {
-        
+        //
+    }
+    public function indexAdmin()
+    {
+        $krses = Krs::all();
+
+        return view('auth.admin.krs.index', compact('krses'));
     }
 
     /**
@@ -35,7 +44,23 @@ class KrsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attr = $request->all();
+
+        $mahasiswa = auth()->user();
+        $kode_matkul = $attr['kode_matkul'];
+        $dosen = Dosen::where('kode_matkul', $kode_matkul)->first();
+
+        // Store
+        $attr['tahun_ajaran'] = '2020/2021';
+        $attr['kode_matkul'] = $kode_matkul;
+        $attr['nim_mahasiswa'] = $mahasiswa->nim;
+        $attr['kode_semester'] = '5';
+        $attr['nip_dosen'] = $dosen->nip;
+
+        Krs::create($attr);
+
+        session()->flash('success', 'KRS telah ditambahkan');
+        return redirect(route('mahasiswa.index'));
     }
 
     /**
@@ -80,6 +105,9 @@ class KrsController extends Controller
      */
     public function destroy(Krs $krs)
     {
-        //
+        $krs->delete();
+
+        session()->flash('success', 'KRS berhasil dihapus');
+        return redirect(route('mahasiswa.index'));
     }
 }

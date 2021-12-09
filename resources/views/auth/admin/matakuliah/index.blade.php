@@ -36,8 +36,11 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a class="btn btn-primary" type="button" href="/tugas6-paw/Views/matakuliah/create.php">
+                    <a class="btn btn-primary" type="button" href="{{ route('admin.matakuliahs.create') }}">
                         Tambah Mata Kuliah
+                    </a>
+                    <a class="btn btn-primary ml-3" type="button" href="{{ route('admin.status_matkuls.index') }}">
+                        Edit Status Matakuliah
                     </a>
                 </div>
                 <div class="card-body">
@@ -71,9 +74,11 @@
                                     <td>{{ $matakuliah->kode }}</td>
                                     <td>{{ $matakuliah->nama }}</td>
                                     <td>{{ $matakuliah->sks }}</td>
-                                    <td>{{ $matakuliah->status_matkuls->nama }}</td>
+                                    <td>{{ $matakuliah->status_matkul->nama }}</td>
                                     <td>
-                                        <a href="">Edit</a> | <a href="">Delete</a>
+                                        <a href="{{ route('admin.matakuliahs.edit', $matakuliah->kode) }}">Edit</a>
+                                        |
+                                        <a href="{{ route('admin.matakuliahs.destroy', $matakuliah->kode) }}">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

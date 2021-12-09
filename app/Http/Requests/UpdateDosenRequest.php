@@ -32,6 +32,8 @@ class UpdateDosenRequest extends FormRequest
             'tahun_masuk' => 'required|numeric',
             'kode_agama' => 'required|string|min:0|max:1',
             'kode_prodi' => 'required|string|min:0|max:2',
+            'kode_matkul' => 'required|string|min:6',
+
         ];
     }
 }

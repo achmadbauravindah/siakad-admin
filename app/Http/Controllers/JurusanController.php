@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fakultas;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,11 @@ class JurusanController extends Controller
     {
         //
     }
+    public function indexAdmin()
+    {
+        $jurusans =  Jurusan::all();
+        return view('auth.admin.jurusan.index', compact('jurusans'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +30,8 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        //
+        $fakultases = Fakultas::all();
+        return view('auth.admin.jurusan.create', compact('fakultases'));
     }
 
     /**
@@ -35,7 +42,15 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'kode' => 'required|string|min:2|unique:jurusans',
+        ]);
+        $attr = $request->all();
+
+        Jurusan::create($attr);
+
+        session()->flash('success', 'Jurusan telah ditambahkan');
+        return redirect(route('admin.jurusans.index'));
     }
 
     /**
@@ -57,7 +72,8 @@ class JurusanController extends Controller
      */
     public function edit(Jurusan $jurusan)
     {
-        //
+        $fakultases = Fakultas::all();
+        return view('auth.admin.jurusan.edit', compact('jurusan', 'fakultases'));
     }
 
     /**
@@ -69,7 +85,20 @@ class JurusanController extends Controller
      */
     public function update(Request $request, Jurusan $jurusan)
     {
-        //
+        $attr = $request->except('kode');
+
+        // Cek jika data sama dan validasi
+        if ($request->input('kode') !== $jurusan->kode) {
+            $data = $request->validate([
+                'kode' => 'required|string|min:2|unique:jurusans',
+            ]);
+        }
+        $attr['kode'] = $request->input('kode');
+
+        $jurusan->update($attr);
+
+        session()->flash('success', 'Jurusan telah diedit');
+        return redirect(route('admin.jurusans.index'));
     }
 
     /**
@@ -80,6 +109,9 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
-        //
+        $jurusan->delete();
+
+        session()->flash('success', 'Fakultas berhasil dihapus');
+        return redirect(route('admin.jurusans.index'));
     }
 }

@@ -108,7 +108,7 @@
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
                             <textarea class="form-control" id="alamat" rows="3"
-                                name="alamat">{{ old('nama')}}</textarea>
+                                name="alamat">{{ old('alamat')}}</textarea>
                         </div>
                         @error('alamat')
                         <div class="text-danger">

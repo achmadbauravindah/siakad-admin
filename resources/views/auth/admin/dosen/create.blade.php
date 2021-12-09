@@ -108,6 +108,22 @@
                             {{ $message }}
                         </div>
                         @enderror
+                        <!-- Matakuliah -->
+                        <div class="form-group">
+                            <label for="kode_matkul">Matakuliah diampu</label>
+                            <select class="form-control" name="kode_matkul" id="kode_matkul">
+                                @foreach ($matakuliahs as $matakuliah)
+                                <option value="{{ $matakuliah->kode }}">
+                                    {{ $matakuliah->nama }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('kode_matkul')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                         <!-- TANGGAL LAHIR -->
                         <div class="form-group">
                             <label for="tanggal_lahir">Tanggal Lahir</label>

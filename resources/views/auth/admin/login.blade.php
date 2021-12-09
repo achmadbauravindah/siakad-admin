@@ -18,7 +18,7 @@
                 <div class="card">
                     <form action="{{ route('adminLogin') }}" method="post" class="box">
                         @csrf
-                        <h1>Login</h1>
+                        <h1>admin</h1>
                         <p class="text-muted"> Please enter your login and password!</p>
                         <input type="text" name="username" placeholder="Username Admin" value="{{ old('username') }}">
                         @error('username')

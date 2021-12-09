@@ -17,7 +17,7 @@ class Dosen extends Authenticatable
     // primary is not integer
     protected $keyType = 'string';
 
-    protected $fillable = ['nip', 'nama', 'password', 'alamat', 'tanggal_lahir', 'jenis_kelamin', 'tahun_masuk', 'kode_agama', 'kode_prodi'];
+    protected $fillable = ['nip', 'nama', 'password', 'alamat', 'tanggal_lahir', 'jenis_kelamin', 'tahun_masuk', 'kode_agama', 'kode_prodi', 'kode_matkul'];
 
     public function agama()
     {
@@ -29,13 +29,18 @@ class Dosen extends Authenticatable
         return $this->belongsTo(Program_studi::class, 'kode_prodi');
     }
 
+    function matakuliah()
+    {
+        return $this->belongsTo(Matakuliah::class, 'kode_matkul');
+    }
+
     function krses()
     {
-        return $this->hasMany(Krs::class, 'kode_semester');
+        return $this->hasMany(Krs::class, 'nip_dosen');
     }
 
     function khses()
     {
-        return $this->hasMany(Khs::class, 'kode_semester');
+        return $this->hasMany(Khs::class, 'nip_dosen');
     }
 }

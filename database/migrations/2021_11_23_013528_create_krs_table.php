@@ -33,7 +33,7 @@ class CreateKrsTable extends Migration
             $table->foreign('kode_semester')->references('kode')->on('semesters');
 
             // nip_dosen
-            $table->char('nip_dosen', 18);
+            $table->char('nip_dosen', 18)->nullable();
             $table->foreign('nip_dosen')->references('nip')->on('dosens');
         });
     }

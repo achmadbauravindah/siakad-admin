@@ -33,11 +33,11 @@ class Mahasiswa extends Authenticatable
 
     function krses()
     {
-        return $this->hasMany(Krs::class, 'kode_semester');
+        return $this->hasMany(Krs::class, 'nim_mahasiswa');
     }
 
     function khses()
     {
-        return $this->hasMany(Khs::class, 'kode_semester');
+        return $this->hasMany(Khs::class, 'nim_mahasiswa');
     }
 }

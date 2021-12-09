@@ -16,6 +16,11 @@ class KhsController extends Controller
     {
         //
     }
+    public function indexAdmin()
+    {
+        $khses = Khs::all();
+        return view('auth.admin.khs.index', compact('khses'));
+    }
 
     /**
      * Show the form for creating a new resource.

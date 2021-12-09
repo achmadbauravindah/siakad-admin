@@ -75,7 +75,7 @@
                                     <td>{{ ($dosen->jenis_kelamin == 0 ? 'Laki-laki':'Perempuan') }}</td>
                                     <td>{{ $dosen->agama->nama }}</td>
                                     <td>
-                                        <a href="{{ route('admin.dosens.show', $dosen->nip) }}">Show</a>
+                                        <a href="{{ route('admin.dosens.show', $dosen->nip) }}">Details</a>
                                         | <a href="{{ route('admin.dosens.edit', $dosen->nip) }}">Edit</a>
                                         | <a href="{{ route('admin.dosens.destroy', $dosen->nip) }}">Delete</a>
                                     </td>

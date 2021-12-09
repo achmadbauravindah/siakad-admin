@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
 use App\Models\Program_studi;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,11 @@ class ProgramStudiController extends Controller
     {
         //
     }
+    public function indexAdmin()
+    {
+        $program_studis =  Program_studi::all();
+        return view('auth.admin.prodi.index', compact('program_studis'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +30,8 @@ class ProgramStudiController extends Controller
      */
     public function create()
     {
-        //
+        $jurusans = Jurusan::all();
+        return view('auth.admin.prodi.create', compact('jurusans'));
     }
 
     /**
@@ -35,7 +42,15 @@ class ProgramStudiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'kode' => 'required|string|min:2|unique:program_studis',
+        ]);
+        $attr = $request->all();
+
+        Program_studi::create($attr);
+
+        session()->flash('success', 'Program Studi telah ditambahkan');
+        return redirect(route('admin.program_studis.index'));
     }
 
     /**
@@ -57,7 +72,8 @@ class ProgramStudiController extends Controller
      */
     public function edit(Program_studi $program_studi)
     {
-        //
+        $jurusans = Jurusan::all();
+        return view('auth.admin.prodi.edit', compact('program_studi', 'jurusans'));
     }
 
     /**
@@ -69,7 +85,20 @@ class ProgramStudiController extends Controller
      */
     public function update(Request $request, Program_studi $program_studi)
     {
-        //
+        $attr = $request->except('kode');
+
+        // Cek jika data sama dan validasi
+        if ($request->input('kode') !== $program_studi->kode) {
+            $data = $request->validate([
+                'kode' => 'required|string|min:2|unique:program_studis',
+            ]);
+        }
+        $attr['kode'] = $request->input('kode');
+
+        $program_studi->update($attr);
+
+        session()->flash('success', 'Program Studi telah diedit');
+        return redirect(route('admin.program_studis.index'));
     }
 
     /**
@@ -80,6 +109,9 @@ class ProgramStudiController extends Controller
      */
     public function destroy(Program_studi $program_studi)
     {
-        //
+        $program_studi->delete();
+
+        session()->flash('success', 'Program Studi berhasil dihapus');
+        return redirect(route('admin.program_studis.index'));
     }
 }

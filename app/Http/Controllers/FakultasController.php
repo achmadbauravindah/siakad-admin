@@ -16,6 +16,11 @@ class FakultasController extends Controller
     {
         //
     }
+    public function indexAdmin()
+    {
+        $fakultases =  Fakultas::all();
+        return view('auth.admin.fakultas.index', compact('fakultases'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +29,7 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth.admin.fakultas.create');
     }
 
     /**
@@ -35,7 +40,15 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'kode' => 'required|string|min:2|unique:fakultas',
+        ]);
+        $attr = $request->all();
+
+        Fakultas::create($attr);
+
+        session()->flash('success', 'Fakultas telah ditambahkan');
+        return redirect(route('admin.fakultases.index'));
     }
 
     /**
@@ -57,7 +70,7 @@ class FakultasController extends Controller
      */
     public function edit(Fakultas $fakultas)
     {
-        //
+        return view('auth.admin.fakultas.edit', compact('fakultas'));
     }
 
     /**
@@ -69,7 +82,20 @@ class FakultasController extends Controller
      */
     public function update(Request $request, Fakultas $fakultas)
     {
-        //
+        $attr = $request->except('kode');
+
+        // Cek jika data sama dan validasi
+        if ($request->input('kode') !== $fakultas->kode) {
+            $data = $request->validate([
+                'kode' => 'required|string|min:2|unique:fakultas',
+            ]);
+        }
+        $attr['kode'] = $request->input('kode');
+
+        $fakultas->update($attr);
+
+        session()->flash('success', 'Fakultas telah diedit');
+        return redirect(route('admin.fakultases.index'));
     }
 
     /**
@@ -80,6 +106,9 @@ class FakultasController extends Controller
      */
     public function destroy(Fakultas $fakultas)
     {
-        //
+        $fakultas->delete();
+
+        session()->flash('success', 'Fakultas berhasil dihapus');
+        return redirect(route('admin.fakultases.index'));
     }
 }

@@ -76,7 +76,7 @@
                                     <td>{{ ($mahasiswa->jenis_kelamin == 0 ? 'Laki-laki':'Perempuan') }}</td>
                                     <td>{{ $mahasiswa->agama->nama }}</td>
                                     <td>
-                                        <a href="{{ route('admin.mahasiswas.show', $mahasiswa->nim) }}">Show</a>
+                                        <a href="{{ route('admin.mahasiswas.show', $mahasiswa->nim) }}">Detail</a>
                                         | <a href="{{ route('admin.mahasiswas.edit', $mahasiswa->nim) }}">Edit</a>
                                         | <a href="{{ route('admin.mahasiswas.destroy', $mahasiswa->nim) }}">Delete</a>
                                     </td>

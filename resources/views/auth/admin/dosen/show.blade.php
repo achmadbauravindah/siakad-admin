@@ -55,6 +55,12 @@
                             <input type="text" class="form-control" id="kode_agama" name="kode_agama"
                                 value="{{ $dosen->agama->nama }}" readonly>
                         </div>
+                        <!-- AGAMA -->
+                        <div class="form-group">
+                            <label for="kode_matkul">Matakuliah diampu</label>
+                            <input type="text" class="form-control" id="kode_matkul" name="kode_matkul"
+                                value="{{ $dosen->matakuliah->nama }}" readonly>
+                        </div>
                         <!-- TANGGAL LAHIR -->
                         <div class="form-group">
                             <label for="tanggal_lahir">Tanggal Lahir</label>
