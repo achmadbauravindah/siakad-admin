@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             DosenSeeder::class,
             KrsSeeder::class,
             KhsSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }

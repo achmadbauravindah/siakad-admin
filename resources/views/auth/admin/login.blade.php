@@ -20,11 +20,11 @@
                         @csrf
                         <h1>admin</h1>
                         <p class="text-muted"> Please enter your login and password!</p>
-                        <input type="text" name="username" placeholder="Username Admin" value="{{ old('username') }}">
+                        <input type="text" name="username" placeholder="Username Admin" value="adminadmin">
                         @error('username')
                         <p class="text-danger"> {{ $message }}</p>
                         @enderror
-                        <input type="password" name="password" placeholder="Password">
+                        <input type="password" name="password" placeholder="Password" value="adminadmin">
                         @error('password')
                         <p class="text-danger"> {{ $message }}</p>
                         @enderror

@@ -14,7 +14,9 @@ class AdminFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => 'Admin',
+            'username' => 'adminadmin',
+            'password' => '$2y$10$XOlYimovWeCTdm6wZjr28O19pI7dykZuq2Thmd9WNegRAD6N65sFa'
         ];
     }
 }
