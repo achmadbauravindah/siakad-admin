@@ -26,7 +26,7 @@ class CreateDosensTable extends Migration
 
         Schema::table('dosens', function (Blueprint $table) {
             // FK Agama
-            $table->boolean('kode_agama');
+            $table->char('kode_agama');
             $table->foreign('kode_agama')->references('kode')->on('agamas');
 
             // FK Prodi
