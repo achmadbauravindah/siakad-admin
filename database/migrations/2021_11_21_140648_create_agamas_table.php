@@ -14,7 +14,7 @@ class CreateAgamasTable extends Migration
     public function up()
     {
         Schema::create('agamas', function (Blueprint $table) {
-            $table->boolean('kode')->primary();
+            $table->char('kode')->primary();
             $table->string('nama', 50);
             $table->timestamps();
         });
