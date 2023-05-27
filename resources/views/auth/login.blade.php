@@ -26,7 +26,7 @@
                     <div class="input-field">
                         <i class="fas fa-user"></i>
                         <input id="username" type="text" class="form-control" name="username"
-                            placeholder="username (nim/nip)" autofocus>
+                            placeholder="username (nim/nip)" autofocus value="190411100015">
                     </div>
                     @error('username')
                     <div class="mt-3" style="color:red;">{{ $message }}</div>
@@ -34,7 +34,7 @@
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
                         <input id="password" type="password" class="form-control " placeholder="password"
-                            name="password" autocomplete="current-password" />
+                            name="password" autocomplete="current-password" value="123123"/>
                     </div>
                     @error('password')
                     <div class="mt-3" style="color:red;">{{ $message }}</div>
